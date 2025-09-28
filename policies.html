@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65">
+    <title>Policies - FreeFire Tournaments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f0f23;
+            color: #e0e0e0;
+            line-height: 1.6;
+            width: 100%;
+            overflow-x: hidden;
+            transform: scale(0.95);
+            transform-origin: top center;
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 12px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 65px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: #8a3ffd;
+            font-size: 1.6rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.3rem;
+            color: #fff;
+            white-space: nowrap;
+        }
+        
+        /* Navigation Styles */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: #8a3ffd;
+            color: white;
+        }
+        
+        /* Main Content Styles */
+        .content {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #8a3ffd;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .policy-section {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #8a3ffd;
+        }
+        
+        .policy-section h2 {
+            color: #8a3ffd;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(138, 63, 253, 0.3);
+        }
+        
+        .policy-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background-color: rgba(138, 63, 253, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 3px solid #8a3ffd;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px 5%;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid rgba(138, 63, 253, 0.3);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: #8a3ffd;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #b0b0b0;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #8a3ffd;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #8a3ffd;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                transform: scale(0.9);
+            }
+            
+            header {
+                padding: 10px 3%;
+                min-height: 60px;
+            }
+            
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo i {
+                font-size: 1.4rem;
+            }
+            
+            nav ul {
+                gap: 8px;
+            }
+            
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .content {
+                padding: 0 10px;
+                margin: 20px auto;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .policy-section {
+                padding: 15px;
+            }
+            
+            .policy-section h2 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                transform: scale(0.85);
+            }
+            
+            header {
+                padding: 8px 2%;
+                min-height: 55px;
+            }
+            
+            .logo h1 {
+                font-size: 1.1rem;
+            }
+            
+            .logo i {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 6px;
+            }
+            
+            nav a {
+                padding: 4px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .policy-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            body {
+                transform: scale(0.8);
+            }
+            
+            header {
+                padding: 6px 2%;
+                min-height: 50px;
+            }
+            
+            .logo h1 {
+                font-size: 1rem;
+            }
+            
+            .logo i {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 4px;
+            }
+            
+            nav a {
+                padding: 3px 5px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-fire"></i>
+            <h1>FreeFire Tournaments</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tournament.html">Tournaments</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="policies.html" class="active">Policies</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="content">
+        <h1 class="page-title">Tournament Policies</h1>
+        
+        <section class="policy-section">
+            <h2>Privacy Policy</h2>
+            <p>We are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information when you use our tournament platform.</p>
+            
+            <div class="highlight">
+                <strong>Information We Collect:</strong> We collect information necessary for tournament registration and participation, including your game ID, contact information, and payment details for entry fees.
+            </div>
+            
+            <p><strong>How We Use Your Information:</strong></p>
+            <ul>
+                <li>To register you for tournaments and manage your participation</li>
+                <li>To communicate important updates about tournaments</li>
+                <li>To process payments and distribute rewards</li>
+                <li>To improve our services and user experience</li>
+            </ul>
+            
+            <p><strong>Data Protection:</strong> We implement industry-standard security measures to protect your personal information. Your data is stored securely and is never shared with third parties without your explicit consent, except as required by law.</p>
+            
+            <p><strong>Your Rights:</strong> You have the right to access, correct, or delete your personal information at any time. Contact our support team for assistance with data-related requests.</p>
+        </section>
+        
+        <section class="policy-section">
+            <h2>Terms of Service</h2>
+            <p>By participating in our tournaments, you agree to abide by the following terms and conditions:</p>
+            
+            <div class="highlight">
+                <strong>Eligibility:</strong> Participants must be at least 13 years old to enter our tournaments. Some tournaments may have additional age restrictions based on game requirements.
+            </div>
+            
+            <p><strong>Player Conduct:</strong></p>
+            <ul>
+                <li>All participants must follow fair play guidelines and exhibit good sportsmanship</li>
+                <li>Cheating, exploiting game bugs, or using unauthorized software will result in immediate disqualification</li>
+                <li>Harassment, hate speech, or toxic behavior toward other players is strictly prohibited</li>
+                <li>Players must respect tournament organizers and follow their instructions</li>
+            </ul>
+            
+            <p><strong>Tournament Rules:</strong></p>
+            <ol>
+                <li>Participants must join matches on time according to the tournament schedule</li>
+                <li>Technical issues must be reported immediately to tournament organizers</li>
+                <li>Decisions made by tournament administrators are final</li>
+                <li>We reserve the right to modify tournament rules as needed to ensure fair competition</li>
+            </ol>
+            
+            <p><strong>Account Responsibility:</strong> You are responsible for maintaining the security of your account and ensuring that all information provided is accurate and up-to-date.</p>
+        </section>
+        
+        <section class="policy-section">
+            <h2>Refund Policy</h2>
+            <p>Our refund policy is designed to be fair to all participants while maintaining the integrity of our tournaments.</p>
+            
+            <div class="highlight">
+                <strong>Refund Eligibility:</strong> Entry fees are fully refundable if a tournament is canceled by the organizers. Partial refunds may be available in cases of technical issues that prevent participation.
+            </div>
+            
+            <p><strong>Refund Scenarios:</strong></p>
+            <ul>
+                <li><strong>Tournament Cancellation:</strong> Full refunds will be processed automatically within 7 business days</li>
+                <li><strong>Player Withdrawal:</strong> Refunds for voluntary withdrawal are available if requested at least 24 hours before the tournament start time</li>
+                <li><strong>Technical Issues:</strong> Refunds may be granted for verifiable technical problems that prevented participation</li>
+                <li><strong>Disqualification:</strong> No refunds will be issued for disqualification due to rule violations</li>
+            </ul>
+            
+            <p><strong>Refund Process:</strong> To request a refund, contact our support team with your tournament details and reason for the request. Refunds will be processed to the original payment method within 7-10 business days after approval.</p>
+            
+            <p><strong>Non-Refundable Items:</strong> Service fees, processing charges, and donations to prize pools are non-refundable once a tournament has begun.</p>
+        </section>
+        
+        <section class="policy-section">
+            <h2>Prize Distribution</h2>
+            <p>This policy outlines how tournament prizes are distributed to winners.</p>
+            
+            <div class="highlight">
+                <strong>Payment Timeline:</strong> Prize money is typically distributed within 14 business days after tournament completion, pending verification of results.
+            </div>
+            
+            <p><strong>Distribution Methods:</strong> Prizes may be distributed via various methods including direct bank transfer, digital wallets, or in-game currency, depending on the tournament and winner's preference.</p>
+            
+            <p><strong>Verification Process:</strong> All winners must complete identity verification before receiving prizes. This may include providing valid identification and completing tax forms for larger prizes.</p>
+            
+            <p><strong>Tax Responsibility:</strong> Winners are solely responsible for any taxes or fees associated with their prizes. We recommend consulting with a tax professional for guidance.</p>
+            
+            <p><strong>Disputes:</strong> Any disputes regarding prize distribution must be submitted in writing within 30 days of tournament completion.</p>
+        </section>
+        
+        <section class="policy-section">
+            <h2>Code of Conduct</h2>
+            <p>All participants in FreeFire Tournaments are expected to adhere to this code of conduct to ensure a positive gaming environment for everyone.</p>
+            
+            <div class="highlight">
+                <strong>Respectful Behavior:</strong> Treat all players, organizers, and spectators with respect. Discrimination, harassment, or bullying of any kind will not be tolerated.
+            </div>
+            
+            <p><strong>Prohibited Actions:</strong></p>
+            <ul>
+                <li>Using cheats, hacks, or any unauthorized third-party software</li>
+                <li>Smurfing (using alternate accounts to gain unfair advantage)</li>
+                <li>Stream sniping or ghosting</li>
+                <li>Collusion or match fixing</li>
+                <li>Impersonating other players or staff members</li>
+            </ul>
+            
+            <p><strong>Communication Guidelines:</strong></p>
+            <ol>
+                <li>Keep all communication respectful and appropriate for all ages</li>
+                <li>Do not share personal information of other participants</li>
+                <li>Follow specific channel rules in Whatsapp or other communication platforms</li>
+                <li>Report any violations to tournament administrators</li>
+            </ol>
+            
+            <p><strong>Consequences:</strong> Violations of this code may result in warnings, temporary bans, permanent bans from future tournaments, or forfeiture of prizes, depending on the severity of the offense.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FreeFire Tournaments</h3>
+                <p>Your premier destination for competitive FreeFire tournaments with exciting prizes and fair play.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://whatsapp.com/channel/0029Vb72lw9JuyAJ9m3hOE1m"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="tournament.html">Current Tournaments</a>
+                <a href="rewards.html">Rewards & Prizes</a>
+                <a href="about.html">About Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="contact.html">Contact Us</a>
+                <a href="policies.html">Policies</a>
+                <a href="#">FAQ</a>
+                <a href="#">Report an Issue</a>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 FreeFire Tournaments. All rights reserved. FreeFire is a registered trademark of Garena.</p>
+        </div>
+    </footer>
+</body>
+</html>
