@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65">
+    <title>Shipping - FreeFire Tournaments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Same CSS as Privacy/Policies page */
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+        body{background:linear-gradient(135deg,#0c0c1d,#1a1a2e);color:#e0e0e0;line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
+        main{flex:1;padding:40px 20px;}
+        .page-title{text-align:center;margin-bottom:40px;font-size:2.8rem;background:linear-gradient(90deg,#fff,#8a3ffd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 4px 8px rgba(0,0,0,0.3);}
+        .policy-section{background:rgba(10,10,25,0.7);border-radius:12px;padding:30px;margin-bottom:25px;box-shadow:0 8px 25px rgba(0,0,0,0.3);border-left:5px solid #8a3ffd;transition:transform 0.3s ease,box-shadow 0.3s ease;}
+        .policy-section:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(138,63,253,0.2);}
+        .policy-section h2{color:#8a3ffd;margin-bottom:18px;font-size:1.8rem;padding-bottom:10px;border-bottom:2px solid rgba(138,63,253,0.3);position:relative;}
+        .policy-section h2::after{content:'';position:absolute;left:0;bottom:-2px;width:50px;height:3px;background-color:#6a11cb;border-radius:2px;}
+        .policy-section p, .policy-section ul, .policy-section ol{margin-bottom:15px;color:#c0c0d0;}
+        .policy-section ul,.policy-section ol{margin-left:25px;}
+        .highlight{background-color:rgba(138,63,253,0.15);padding:15px 20px;border-radius:8px;margin:20px 0;border-left:4px solid #8a3ffd;color:#e0e0e0;font-style:italic;}
+        .highlight strong{color:#fff;font-weight:600;}
+        footer{background:#0a0a19;padding:3rem 0 1rem;margin-top:4rem;}
+        .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;padding:0 20px;}
+        .footer-column h3{color:#8a3ffd;margin-bottom:1.5rem;font-size:1.3rem;}
+        .footer-column p{color:#b0b0c0;margin-bottom:1.5rem;}
+        .footer-column ul{list-style:none;}
+        .footer-column ul li{margin-bottom:0.8rem;}
+        .footer-column ul li a{color:#b0b0c0;text-decoration:none;transition:color 0.3s;}
+        .footer-column ul li a:hover{color:#8a3ffd;}
+        .social-icons{display:flex;gap:1rem;}
+        .social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:#1e1e2d;border-radius:50%;color:#8a3ffd;transition:all 0.3s ease;position:relative;overflow:hidden;}
+        .social-icons a::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(138,63,253,0.4),transparent);transition:left 0.5s;}
+        .social-icons a:hover::before{left:100%;}
+        .social-icons a:hover{background:#8a3ffd;color:white;transform:translateY(-3px) scale(1.1);box-shadow:0 5px 15px rgba(138,63,253,0.4);}
+        .copyright{text-align:center;padding-top:2rem;margin-top:2rem;border-top:1px solid #1e1e2d;color:#b0b0c0;font-size:0.9rem;}
+        .newsletter-form input[type="email"]{width:100%;padding:10px 15px;border-radius:5px;border:1px solid #333;background-color:#1e1e2d;color:#fff;margin-bottom:10px;}
+        .newsletter-form button{background:#8a3ffd;color:white;border:none;padding:10px 15px;border-radius:5px;width:100%;font-weight:600;cursor:pointer;transition:all 0.3s ease;}
+        .newsletter-form button:hover{background:#7a2eed;transform:translateY(-2px);}
+        button.back-btn{position:fixed;top:20px;left:20px;padding:10px 15px;background:#8a3ffd;color:#fff;border:none;border-radius:5px;cursor:pointer;z-index:1000;}
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.history.back()">← Back</button>
+
+    <main class="container">
+        <h1 class="page-title">Prize <span>Delivery</span></h1>
+
+        <section class="policy-section">
+            <h2>Delivery Methods</h2>
+            <p>हम विजेताओं को उनके पुरस्कार उनके अनुसार उपलब्ध करवाएंगे। आप online (UPI, Paytm, Bank Transfer, PayPal) या offline (Cash, Gift Voucher) तरीके से prize प्राप्त कर सकते हैं।</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>Estimated Time</h2>
+            <p>Online prizes तुरंत या 1-2 दिन में भेजे जाएंगे। Offline/cash prize के लिए विजेता से समय तय किया जाएगा।</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>Contact for Issues</h2>
+            <p>यदि कोई विजेता prize receive नहीं कर पाता या कोई समस्या आती है, तो tournament support team से तुरंत संपर्क करें।</p>
+            <ul>
+                <li>WhatsApp: [आपका WhatsApp नंबर]</li>
+                <li>Call: [आपका Phone नंबर]</li>
+                <li>Email: [आपका Email]</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>Disclaimer</h2>
+            <p>Tournament organizers किसी भी external delivery service या courier service के लिए जिम्मेदार नहीं होंगे। Prize delivery केवल verified winners के लिए होगी।</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>FreeFire Tournaments</h3>
+                <p>Join the ultimate competitive platform for FreeFire players. Show your skills, win prizes, and become a champion!</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://whatsapp.com/channel/0029Vb72lw9JuyAJ9m3hOE1m" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                    <h3>Quick Links</h3>
+                       <ul>
+                          <li><a data-page="index.html">Home</a></li>
+                          <li><a data-page="tournament.html">Tournaments</a></li>
+                          <li><a data-page="rewards.html">Rewards</a></li>
+                          <li><a data-page="about.html">About Us</a></li>
+                          <li><a data-page="contact.html">Contact</a></li>
+                          <li><a data-page="policies.html">Policies</a></li>
+                          <li><a data-page="terms.html">Terms & Conditions</a></li>
+                          <li><a data-page="refund.html">Refund Policy</a></li>
+                          <li><a data-page="shipping.html">Shipping Policy</a></li>
+                     </ul>
+                </div>
+            <div class="footer-column">
+                <h3>For more details</h3>
+                <p>Don't forget to get your email for upcoming tournaments and events notifications.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">&copy; Organised by BCA 1st Semester Students.</div>
+    </footer>
+
+    <script>
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive tournament updates.`);
+            this.reset();
+        });
+    </script>
+</body>
+</html>

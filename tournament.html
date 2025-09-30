@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65">
+    <title>FreeFire Tournament Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-fire fa-2x" style="color: #8a3ffd;"></i>
+                <h1>FreeFire Tournaments</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="tournament.html">Tournaments</a></li>
+                    <li><a href="rewards.html">Rewards</a></li>
+                    
+                    <li><a href="contact.html">Contact</a></li>
+                
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Auth Forms -->
+        <div id="authSection">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Login</div>
+                <div class="auth-tab" id="signupTab">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="auth-btn" id="loginBtn">Login</button>
+                <div class="auth-message" id="loginMessage"></div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password">
+                </div>
+                <button class="auth-btn" id="signupBtn">Sign Up</button>
+                <div class="auth-message" id="signupMessage"></div>
+            </div>
+        </div>
+
+        <!-- Tournament Form (Initially Hidden) -->
+        <main id="tournamentContainer" style="display:none;">
+            <div class="page-header">
+                <h1>🔥 FreeFire Tournament Registration</h1>
+                <p>Register & Win Cash Prizes</p>
+            </div>
+
+            <!-- Mode Selection -->
+<section class="mode-selection">
+    <h2>Select Tournament Mode</h2>
+    <div class="mode-options">
+
+        <!-- Solo -->
+        <div class="mode-card active" data-mode="solo" data-fee="30">
+            <img src="images/solovssolo.jpeg" alt="Solo Mode" class="mode-img">
+            <div class="mode-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <h3>BR Solo</h3>
+            <div class="fee">₹30</div>
+            <p>Individual player registration</p>
+            <div class="players-info">1 Player</div>
+        </div>
+
+        <!-- Squad -->
+        <div class="mode-card" data-mode="squad" data-fee="120">
+            <img src="images/squad.jpg" alt="Squad Mode" class="mode-img">
+            <div class="mode-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>BR Squad</h3>
+            <div class="fee">₹120</div>
+            <p>Team registration (4 players)</p>
+            <div class="players-info">4 Players</div>
+        </div>
+
+        <!-- CS Custom -->
+        <div class="mode-card" data-mode="cs" data-fee="120">
+            <img src="images/cs.jpg" alt="CS Custom Mode" class="mode-img">
+            <div class="mode-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>CS Custom</h3>
+            <div class="fee">₹120</div>
+            <p>Team registration (4 players)</p>
+            <div class="players-info">4 Players</div>
+        </div>
+    </div>
+</section>
+
+            <!-- Registration Form -->
+            <section class="registration-form">
+                <h2>Player Details - <span id="selectedMode">Solo</span></h2>
+
+                <div class="form-instructions">
+                    <p><i class="fas fa-info-circle"></i> Fill in all required details accurately. Incorrect information may lead to disqualification.</p>
+                </div>
+
+                <form id="tournamentForm">
+                    <!-- Solo Fields -->
+                    <div class="form-section solo-fields">
+                        <div class="input-group">
+                            <label for="playerName">Game me jo naam hai<span class="required">*</span></label>
+                            <input type="text" id="playerName" placeholder="Your exact FreeFire game name" required>
+                            <small>Enter your exact FreeFire game name as it appears in the game</small>
+                        </div>
+                        <div class="input-group">
+                            <label for="mobile">Mobile Number <span class="required">*</span></label>
+                            <input type="tel" id="mobile" placeholder="Your active mobile number" required>
+                            <small>We'll contact you on this number for tournament updates</small>
+                        </div>
+                    </div>
+
+                    <!-- Squad/CS Fields -->
+                    <div class="form-section squad-fields" style="display:none;">
+                        <div class="team-leader-section">
+                            <h4><i class="fas fa-crown"></i> Team Leader Details</h4>
+                            <div class="input-group">
+                                <label for="teamLeaderName">Team Leader Game Name <span class="required">*</span></label>
+                                <input type="text" id="teamLeaderName" placeholder="Team Leader Name" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="teamMobile">Team Leader Mobile <span class="required">*</span></label>
+                                <input type="tel" id="teamMobile" placeholder="Team Leader Mobile" required>
+                            </div>
+                        </div>
+                        
+                        <div class="teammates-section">
+                            <h4><i class="fas fa-users"></i> Teammates Details</h4>
+                            <div class="players-grid">
+                                <div class="input-group">
+                                    <label for="player1">Player 2 Name <span class="required">*</span></label>
+                                    <input type="text" id="player1" placeholder="Player 2 Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="player2">Player 3 Name <span class="required">*</span></label>
+                                    <input type="text" id="player2" placeholder="Player 3 Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="player3">Player 4 Name <span class="required">*</span></label>
+                                    <input type="text" id="player3" placeholder="Player 4 Name" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Summary -->
+                    <div class="payment-summary">
+                        <h3><i class="fas fa-receipt"></i> Payment Summary</h3>
+                        <div class="summary-item">
+                            <span>Entry Fee:</span>
+                            <span id="entryFeeDisplay">₹30</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Processing Fee:</span>
+                            <span>₹10</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Total Amount:</span>
+                            <span id="totalAmount">₹40</span>
+                        </div>
+                    </div>
+
+                    <button type="button" id="payButton" class="pay-button">
+                        <i class="fas fa-lock"></i> Pay & Register
+                    </button>
+                </form>
+            </section>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage" style="display:none;">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Registration Successful!</h3>
+                <p id="successDetails">Your registration for Solo mode has been confirmed.</p>
+                <button onclick="resetTournamentForm()" class="success-btn">
+                   <i class="fas fa-plus"></i> Register Another
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FreeFire Tournaments</h3>
+                    <p>Join the ultimate competitive platform for FreeFire players. Show your skills, win prizes, and become a champion!</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" class="facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://youtube.com" class="youtube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029Vb72lw9JuyAJ9m3hOE1m" class="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com" class="instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                       <ul>
+                          <li><a data-page="index.html">Home</a></li>
+                          <li><a data-page="tournament.html">Tournaments</a></li>
+                          <li><a data-page="rewards.html">Rewards</a></li>
+                          <li><a data-page="about.html">About Us</a></li>
+                          <li><a data-page="contact.html">Contact</a></li>
+                          <li><a data-page="policies.html">Policies</a></li>
+                          <li><a data-page="terms.html">Terms & Conditions</a></li>
+                          <li><a data-page="refund.html">Refund Policy</a></li>
+                          <li><a data-page="shipping.html">Shipping Policy</a></li>
+                     </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> pankajpaikra63@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 6267348521</p>
+                    <p><i class="fas fa-map-marker-alt"></i> karmaha padsilipara post parsa block ambikapur , Chhattisgarh, India</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; Organised by BCA 1st Semester Students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

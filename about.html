@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.65">
+    <title>About Us - FreeFire Tournaments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c1d, #1a1a2e);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #8a3ffd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            background: #6a11cb;
+            transform: translateY(-2px);
+        }
+
+        .about-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+        
+        .section-title span {
+            color: #8a3ffd;
+        }
+        
+        .about-content {
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 15px;
+            padding: 3rem;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .about-header h3 {
+            font-size: 2rem;
+            color: #8a3ffd;
+            margin-bottom: 1rem;
+        }
+        
+        .about-details {
+            text-align: left;
+            color: #b0b0c0;
+            line-height: 1.8;
+        }
+        
+        .about-details h4 {
+            color: #8a3ffd;
+            margin: 2rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .about-details p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-details ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .team-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-card {
+            background: rgba(42, 42, 60, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-card i {
+            font-size: 3rem;
+            color: #8a3ffd;
+            margin-bottom: 1rem;
+        }
+        
+        .team-card h5 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        footer {
+            background: rgba(10, 10, 25, 0.9);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: #8a3ffd;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: #b0b0c0;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(30, 30, 45, 0.7);
+            border-radius: 50%;
+            color: #8a3ffd;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #8a3ffd;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #b0b0c0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #8a3ffd;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(30, 30, 45, 0.7);
+            color: #b0b0c0;
+            font-size: 0.9rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button at top-left -->
+    <button class="back-btn" onclick="goBack()">← Back</button>
+
+    <section class="about-section">
+        <h2 class="section-title">About <span>Us</span></h2>
+        
+        <div class="about-content">
+            <div class="about-header">
+                <h3>FreeFire Tournaments Platform</h3>
+                <p>Your premier destination for competitive FreeFire gaming tournaments</p>
+            </div>
+            
+            <div class="about-details">
+                <h4>Company Information</h4>
+                <p><strong>FreeFire Tournaments</strong> is a gaming platform founded by BCA 1st semester students passionate about esports and competitive gaming. Our mission is to provide a fair, secure, and exciting tournament experience for FreeFire players of all skill levels.</p>
+                
+                <h4>Our Vision</h4>
+                <p>To create the most trusted and engaging tournament platform for FreeFire enthusiasts, where players can  participate and compete, improve their skills, and win amazing prizes.</p>
+                
+                <h4>What We Offer</h4>
+                <ul>
+                    <li>Daily and weekly FreeFire tournaments</li>
+                    <li>Cash prizes and in-game rewards</li>
+                    <li>Fair matchmaking and anti-cheat systems</li>
+                    <li>Secure payment processing</li>
+                    <li>24/7 customer support</li>
+                </ul>
+                
+                <h4>Our Team</h4>
+                <p>We are a team of passionate gamers and developers from BCA 1st semester, dedicated to creating the best tournament experience for FreeFire players.</p>
+            </div>
+            
+            <div class="team-section">
+                <div class="team-card">
+                    <i class="fas fa-users"></i>
+                    <h5>Passionate Gamers</h5>
+                    <p>Our team consists of competitive gamers who understand what players want</p>
+                </div>
+                
+                <div class="team-card">
+                    <i class="fas fa-code"></i>
+                    <h5>Skilled Developers</h5>
+                    <p>Technical expertise to build a seamless tournament platform</p>
+                </div>
+                
+                <div class="team-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h5>Security Focused</h5>
+                    <p>Prioritizing fair play and secure transactions for all users</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>FreeFire Tournaments</h3>
+                <p>Join the ultimate competitive platform for FreeFire players. Show your skills, win prizes, and become a champion!</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029Vb72lw9JuyAJ9m3hOE1m" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                    <h3>Quick Links</h3>
+                       <ul>
+                          <li><a data-page="index.html">Home</a></li>
+                          <li><a data-page="tournament.html">Tournaments</a></li>
+                          <li><a data-page="rewards.html">Rewards</a></li>
+                          <li><a data-page="about.html">About Us</a></li>
+                          <li><a data-page="contact.html">Contact</a></li>
+                          <li><a data-page="policies.html">Policies</a></li>
+                          <li><a data-page="terms.html">Terms & Conditions</a></li>
+                          <li><a data-page="refund.html">Refund Policy</a></li>
+                          <li><a data-page="shipping.html">Shipping Policy</a></li>
+                     </ul>
+                </div>
+            
+            <div class="footer-column">
+                <h3>For more details</h3>
+                <p>Don't forget to get your email for upcoming tournaments and events notifications.</p>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Your Email" required>
+                    <button class="btn" style="width: 100%; margin-top: 10px; padding: 0.8rem; background: #8a3ffd; color: white; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Organised by BCA 1st Semester Students.</p>
+        </div>
+    </footer>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive tournament updates.`);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
