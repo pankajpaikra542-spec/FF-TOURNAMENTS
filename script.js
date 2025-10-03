@@ -1,4 +1,6 @@
+// ===================
 // Firebase Config
+// ===================
 const firebaseConfig = {
     apiKey: "AIzaSyDDuqLprmwkAXPHxyft31Nf_XnM3JaFgnI",
     authDomain: "ffmax-1a509.firebaseapp.com",
@@ -14,7 +16,9 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
 
+// ===================
 // DOM Elements
+// ===================
 const loginTab = document.getElementById("loginTab");
 const signupTab = document.getElementById("signupTab");
 const loginForm = document.getElementById("loginForm");
@@ -36,11 +40,12 @@ const totalAmount = document.getElementById("totalAmount");
 const successMessage = document.getElementById("successMessage");
 const successDetails = document.getElementById("successDetails");
 
-// Active mode tracking
 let selectedMode = "solo";
 let entryFee = 30;
 
+// ===================
 // Auth Tab Switching
+// ===================
 loginTab.addEventListener("click", () => {
     loginTab.classList.add("active");
     signupTab.classList.remove("active");
@@ -55,7 +60,9 @@ signupTab.addEventListener("click", () => {
     loginForm.style.display = "none";
 });
 
+// ===================
 // Auth Functions
+// ===================
 loginBtn.addEventListener("click", async () => {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
@@ -86,35 +93,49 @@ signupBtn.addEventListener("click", async () => {
     }
 });
 
+// ===================
+// Check Login State
+// ===================
+auth.onAuthStateChanged(user => {
+    if (user) {
+        tournamentContainer.style.display = "block";
+        document.getElementById("authSection").style.display = "none";
+    } else {
+        tournamentContainer.style.display = "none";
+        document.getElementById("authSection").style.display = "block";
+    }
+});
+
+// ===================
 // Mode Selection
+// ===================
 modeCards.forEach(card => {
     card.addEventListener("click", () => {
         modeCards.forEach(c => c.classList.remove("active"));
         card.classList.add("active");
-        selectedMode = card.getAttribute("data-mode");
-        entryFee = parseInt(card.getAttribute("data-fee"));
+
+        selectedMode = card.dataset.mode;
+        entryFee = parseInt(card.dataset.fee);
+
         selectedModeSpan.textContent = selectedMode.toUpperCase();
         entryFeeDisplay.textContent = `₹${entryFee}`;
         totalAmount.textContent = `₹${entryFee + 10}`;
 
-        // Show/hide form sections
-        if (selectedMode === "solo") {
-            soloFields.style.display = "block";
-            squadFields.style.display = "none";
-        } else {
-            soloFields.style.display = "none";
-            squadFields.style.display = "block";
-        }
+        soloFields.style.display = selectedMode === "solo" ? "block" : "none";
+        squadFields.style.display = selectedMode !== "solo" ? "block" : "none";
     });
 });
 
-// Utility: Mobile Validation
+// ===================
+// Mobile Validation
+// ===================
 function validateMobile(number) {
-    const regex = /^[6-9]\d{9}$/;
-    return regex.test(number);
+    return /^[6-9]\d{9}$/.test(number);
 }
 
-// Reset Tournament Form
+// ===================
+// Reset Form
+// ===================
 function resetTournamentForm() {
     document.getElementById("tournamentForm").reset();
     successMessage.style.display = "none";
@@ -130,13 +151,12 @@ function resetTournamentForm() {
     squadFields.style.display = "none";
 }
 
-// Load Razorpay Script Dynamically
+// ===================
+// Load Razorpay Script
+// ===================
 function loadRazorpayScript() {
     return new Promise((resolve, reject) => {
-        if (document.querySelector("script[src='https://checkout.razorpay.com/v1/checkout.js']")) {
-            resolve(true);
-            return;
-        }
+        if (window.Razorpay) return resolve(true);
         const script = document.createElement("script");
         script.src = "https://checkout.razorpay.com/v1/checkout.js";
         script.onload = () => resolve(true);
@@ -145,13 +165,17 @@ function loadRazorpayScript() {
     });
 }
 
+// ===================
 // Collect Form Data
+// ===================
 function collectFormData() {
     if (!auth.currentUser) {
-        alert("User not logged in!");
+        alert("Please login first!");
         return null;
     }
-    let data = { mode: selectedMode, userEmail: auth.currentUser.email };
+
+    const data = { mode: selectedMode, userEmail: auth.currentUser.email };
+
     if (selectedMode === "solo") {
         const playerName = document.getElementById("playerName").value.trim();
         const mobile = document.getElementById("mobile").value.trim();
@@ -164,21 +188,26 @@ function collectFormData() {
         const player1 = document.getElementById("player1").value.trim();
         const player2 = document.getElementById("player2").value.trim();
         const player3 = document.getElementById("player3").value.trim();
+
         if (!leaderName || !leaderMobile || !player1 || !player2 || !player3) {
             alert("Fill all fields!"); return null;
         }
         if (!validateMobile(leaderMobile)) { alert("Enter valid leader mobile!"); return null; }
+
         data.players = [
             { name: leaderName, mobile: leaderMobile },
             { name: player1 }, { name: player2 }, { name: player3 }
         ];
     }
+
     data.amount = entryFee + 10;
     data.timestamp = Date.now();
     return data;
 }
 
-// Save Data to Firebase
+// ===================
+// Save to Firebase
+// ===================
 function saveToFirebase(data) {
     const ref = database.ref(`tournaments/${selectedMode}`);
     const newEntry = ref.push();
@@ -192,7 +221,9 @@ function saveToFirebase(data) {
     });
 }
 
+// ===================
 // Pay & Register
+// ===================
 payButton.addEventListener("click", async () => {
     const formData = collectFormData();
     if (!formData) return;
@@ -203,43 +234,46 @@ payButton.addEventListener("click", async () => {
     try {
         await loadRazorpayScript();
 
-        // Create order on backend
-        const response = await fetch("/create-order", {
+        // 1. Public key backend se lo
+        const keyRes = await fetch("/.netlify/functions/get-key");
+        const { key } = await keyRes.json();
+
+        // 2. Order create backend se karo
+        const response = await fetch("/.netlify/functions/create-order", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: formData.amount })
+            body: JSON.stringify({ amount: formData.amount * 100 }) // paise me
         });
 
-        if (!response.ok) throw new Error("Server error. Try again!");
+        if (!response.ok) throw new Error("Server error! Try again.");
         const orderData = await response.json();
 
+        // 3. Razorpay checkout
         const options = {
-            key: "YOUR_RAZORPAY_KEY", // Add your key here
+            key, // ✅ ab Netlify se aya key use ho raha hai
             amount: orderData.amount,
             currency: "INR",
             name: "FreeFire Tournament",
             description: `Payment for ${selectedMode.toUpperCase()} mode`,
             order_id: orderData.id,
             handler: function (res) {
-                // Payment successful → save to Firebase
                 saveToFirebase(formData);
                 tournamentContainer.style.display = "none";
                 successMessage.style.display = "block";
                 successDetails.textContent = `Your registration for ${selectedMode.toUpperCase()} mode has been confirmed.`;
                 payButton.disabled = false;
                 payButton.textContent = "Pay & Register";
+                resetTournamentForm();
             },
             theme: { color: "#8a3ffd" }
         };
 
         const rzp = new Razorpay(options);
-
-        rzp.on("payment.failed", function () {
-            alert("Payment failed. Please try again.");
+        rzp.on("payment.failed", function (response) {
+            alert("Payment failed: " + response.error.description);
             payButton.disabled = false;
             payButton.textContent = "Pay & Register";
         });
-
         rzp.on("checkout.dismiss", function () {
             payButton.disabled = false;
             payButton.textContent = "Pay & Register";
